@@ -6,6 +6,9 @@ data class CharacterUI(
     data class ResultUI(
         val id: Int,
         val name: String,
-        val image: String
+        val image: String,
+        val gender: String,
+        val species: String,
+        val status: String
     )
 }

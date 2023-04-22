@@ -9,7 +9,7 @@ import javax.inject.Inject
 class CharacterUseCase @Inject constructor(
     private val repository: CharacterRepository
 ) {
-    suspend operator fun invoke(): Flow<PagingData<CharacterUI.ResultUI>> {
+    operator fun invoke(): Flow<PagingData<CharacterUI.ResultUI>> {
         return repository.getCharacter()
     }
 }

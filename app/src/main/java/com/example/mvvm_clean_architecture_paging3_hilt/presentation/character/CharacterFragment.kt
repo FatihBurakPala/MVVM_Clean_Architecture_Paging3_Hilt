@@ -7,6 +7,7 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mvvm_clean_architecture_paging3_hilt.R
 import com.example.mvvm_clean_architecture_paging3_hilt.common.viewBinding
@@ -18,8 +19,10 @@ import kotlinx.coroutines.launch
 class CharacterFragment : Fragment(R.layout.fragment_character) {
 
     private val binding by viewBinding(FragmentCharacterBinding::bind)
-    private lateinit var characterAdapter: CharacterAdapter
     private val viewModel: CharacterViewModel by hiltNavGraphViewModels(R.id.main_nav)
+
+    //private lateinit var characterAdapter: CharacterAdapter
+    private val characterAdapter = CharacterAdapter(::itemSetClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +31,6 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
     }
 
     private fun setupRecyclerView() {
-        characterAdapter = CharacterAdapter()
         binding.recyclerView.apply {
             adapter = characterAdapter
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -52,6 +54,14 @@ class CharacterFragment : Fragment(R.layout.fragment_character) {
             }
         }
     }
+
+    private fun itemSetClick(characterId: Int) {
+        findNavController().navigate(
+            CharacterFragmentDirections
+                .actionCharacterFragmentToCharacterDetailFragment(characterId)
+        )
+    }
+
 //    private fun loadData() {
 //        lifecycleScope.launch {
 //            repeatOnLifecycle(Lifecycle.State.STARTED) {

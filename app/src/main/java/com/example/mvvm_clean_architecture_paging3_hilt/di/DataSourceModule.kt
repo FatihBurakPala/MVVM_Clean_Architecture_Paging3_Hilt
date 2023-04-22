@@ -1,8 +1,8 @@
 package com.example.mvvm_clean_architecture_paging3_hilt.di
 
 import com.example.mvvm_clean_architecture_paging3_hilt.data.source.ApiService
-import com.example.mvvm_clean_architecture_paging3_hilt.data.source.DataSourceImpl
-import com.example.mvvm_clean_architecture_paging3_hilt.domain.source.DataSource
+import com.example.mvvm_clean_architecture_paging3_hilt.data.source.RemoteDataSourceImpl
+import com.example.mvvm_clean_architecture_paging3_hilt.domain.source.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,5 +17,5 @@ object DataSourceModule {
     @Singleton
     fun provideDataSource(
         apiService: ApiService
-    ) : DataSource = DataSourceImpl(apiService)
+    ) : RemoteDataSource = RemoteDataSourceImpl(apiService)
 }

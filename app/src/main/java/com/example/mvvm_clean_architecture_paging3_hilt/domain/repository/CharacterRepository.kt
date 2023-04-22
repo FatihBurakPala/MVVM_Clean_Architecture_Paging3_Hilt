@@ -5,5 +5,8 @@ import com.example.mvvm_clean_architecture_paging3_hilt.domain.model.CharacterUI
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
-    suspend fun getCharacter(): Flow<PagingData<CharacterUI.ResultUI>>
+
+    fun getCharacter(): Flow<PagingData<CharacterUI.ResultUI>>
+
+    suspend fun getCharacterById(characterId: Int): CharacterUI.ResultUI
 }

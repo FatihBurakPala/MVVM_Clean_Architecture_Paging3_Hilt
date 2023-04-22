@@ -9,7 +9,8 @@ import com.example.mvvm_clean_architecture_paging3_hilt.common.loadImage
 import com.example.mvvm_clean_architecture_paging3_hilt.databinding.ListItemBinding
 import com.example.mvvm_clean_architecture_paging3_hilt.domain.model.CharacterUI
 
-class CharacterAdapter: PagingDataAdapter<CharacterUI.ResultUI, CharacterAdapter.MyViewHolder>(diffCallback) {
+class CharacterAdapter(private val itemClickListener: (Int) -> Unit
+): PagingDataAdapter<CharacterUI.ResultUI, CharacterAdapter.MyViewHolder>(diffCallback) {
 
     inner class MyViewHolder(val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -26,9 +27,13 @@ class CharacterAdapter: PagingDataAdapter<CharacterUI.ResultUI, CharacterAdapter
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.apply {
-            tvDescription.text = getItem(position)?.name
-            imageView.loadImage(getItem(position)?.image)
+        val currentItem = getItem(position)
+        currentItem?.let {
+            holder.binding.apply {
+                tvDescription.text = currentItem.name
+                imageCharacters.loadImage(currentItem.image)
+                root.setOnClickListener { itemClickListener.invoke(currentItem.id) }
+            }
         }
     }
 

@@ -10,5 +10,8 @@ fun Character.toCharacterUI() = CharacterUI(
 fun Result.toResultUI() = CharacterUI.ResultUI(
     id = id,
     name = name,
-    image = image
+    image = image,
+    gender = gender,
+    species = species,
+    status = status
 )
