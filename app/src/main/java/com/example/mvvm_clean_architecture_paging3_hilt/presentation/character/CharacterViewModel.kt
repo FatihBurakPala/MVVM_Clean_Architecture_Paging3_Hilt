@@ -25,18 +25,4 @@ class CharacterViewModel @Inject constructor(private val useCase: CharacterUseCa
             _characters.value = CharacterState.Success(it)
         }
     }
-
-//    private fun getAllCharacter() {
-//        viewModelScope.launch {
-//            getAllCharacterUseCase().cachedIn(viewModelScope).collect { pagingData ->
-//                pagingData.map { it.toMap() }.also {
-//                    _allCharacter.value = CharacterUiState.Success(it)
-//                }
-//            }
-//        }
-//    }
-
-//    val characterList = Pager(PagingConfig(1)) {
-//        CharacterPagingSource(repository)
-//    }.flow.cachedIn(viewModelScope)
 }
